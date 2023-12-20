@@ -66,6 +66,10 @@ elif page == pages[2]:
     fig4 = px.scatter(df, x="Performance Index", y="Previous Scores", title="Evolution de la performance en fonction des scores obtenus dernièrement")
     st.plotly_chart(fig4)
     
+    #Encodage du colonne objet
+    from sklearn.preprocessing import LabelEncoder
+    df['Extracurricular Activities'] = LabelEncoder().fit_transform(df['Extracurricular Activities'])
+    
     fig5, ax = plt.subplots()
     sns.heatmap(df.corr(), ax=ax)
     plt.title("Matrice de corrélation des variables du dataframe")
@@ -75,9 +79,7 @@ elif page == pages[2]:
 elif page == pages[3]:
     st.write("### Modélisation")
     
-    #Encodage du colonne objet
-    from sklearn.preprocessing import LabelEncoder
-    df['Extracurricular Activities'] = LabelEncoder().fit_transform(df['Extracurricular Activities'])
+    
     
     df_prep = pd.read_csv("df_preprocessed.csv")
     
